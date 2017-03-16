@@ -38,6 +38,7 @@ public class DriverHelper {
 		String inputFileName="";
 		String firstLine="";
 		String[] lines=new String[300];
+		Student[] studentArray=new Student[300];
 		int counter=0;
 		
 		System.out.print("Enter name of input file (course-semester-year.csv): ");
@@ -52,9 +53,8 @@ public class DriverHelper {
 			}
 			dReader.setStudentArraySize(counter);
 			dReader.formatData(firstLine, lines);
-			//return student array from DataReader
-			//find size of filled student array
-			//add each student in array to linked list
+			studentArray=dReader.returnStudent();
+			//add each student in studentArray to linked list using for loop, use counter to stop
 			reader.close();
 		}
 		catch(FileNotFoundException e){
