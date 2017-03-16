@@ -44,16 +44,13 @@ public class DriverHelper {
 		inputFileName=kb.nextLine();
 		try{
 			Scanner reader=new Scanner(new BufferedReader(new FileReader(inputFileName)));
-			//read first line
+			
 			firstLine=reader.nextLine();
-			//read each line after and put into array
 			while(reader.hasNextLine()){
 				lines[counter]=reader.nextLine();
 				counter++;
 			}
-			//find size of filled string array, pass to data reader
 			dReader.setStudentArraySize(counter);
-			//use DataReader to process data
 			dReader.formatData(firstLine, lines);
 			//return student array from DataReader
 			//find size of filled student array
@@ -85,6 +82,20 @@ public class DriverHelper {
 	}
 	
 	public void optionG(Scanner kb){
+		String studentID="";
+		String gradeName="";
+		String course="";
 		
+		System.out.print("Enter student ID for student to print data from: ");
+		studentID=kb.nextLine();
+		//verify student is valid
+		System.out.print("Enter course for student to print data from: ");
+		course=kb.nextLine();
+		//verify student is associated with that course
+		System.out.print("Enter name of assignment for grade information to print data from: ");
+		gradeName=kb.nextLine();
+		//verify gradename is valid for student and course
+		
+		//print data for student, gradeName, and course
 	}
 }

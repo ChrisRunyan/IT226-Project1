@@ -6,6 +6,9 @@ import java.util.LinkedList;
 public class ReadData{
 	public void readData(File file){
 		
+		//vvREADMEvvREADMEvvREADMEvv
+		//THIS CLASS DOES NOTHING AND WAS REPLACED BY DATAREADER.JAVA
+		//^^README^^README^^README^^
 
 		//file opened in main method, passed here
 		//read file and separate out each piece of information line by line

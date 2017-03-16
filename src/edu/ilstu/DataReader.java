@@ -18,6 +18,7 @@ public class DataReader {
 	public void formatData(String line1, String[] lines) {
 		String[] splice = line1.split(",");
 
+		//Kevin: I added the array size of lines (studentArraySize) so the for loop doesn't have to loop 300 times
 		for (int i = 0; i < lines.length; i++) {
 
 			if (splice[0].equalsIgnoreCase("student name")) {
