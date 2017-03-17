@@ -20,7 +20,8 @@ public class DataReader {
 
 		//Kevin: I added the array size of lines (studentArraySize) so the for loop doesn't have to loop 300 times
 		for (int i = 0; i < lines.length; i++) {
-
+			student[i]=new Student();
+			
 			if (splice[0].equalsIgnoreCase("student name")) {
 
 				formatFullNameFirst(line1, lines[i], i);
