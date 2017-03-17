@@ -10,9 +10,11 @@ import java.util.LinkedList;
  */
 public class StudentDataLinkedList<E> {
 	public LinkedList<E> list = new LinkedList<E>();
+	
 	public StudentDataLinkedList(LinkedList<E> list){
 		this.list = list;
-	}	
+	}
+	
 	public void printStudentData(){
 		for(int i= 0; i< list.size(); i++){
 			Student a = null;

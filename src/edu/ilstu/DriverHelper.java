@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class DriverHelper {
 	DataReader dReader=new DataReader();
+	//**instantiate linked list here
 	
 	public void printMenu(){
 		System.out.print("Choices:\n\"A\": Add data (You will need to enter an input filename)"
