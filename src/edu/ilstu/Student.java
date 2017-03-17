@@ -56,11 +56,11 @@ public class Student{
 		this.course=course;
 	}
 	
-	public void printStudentName(){
-		System.out.println("First Name: "+firstName+"\nLast Name: "+lastName+"\nULID: "+ulid);
+	public String returnStudentName(){
+		return ("First Name: "+firstName+"\nLast Name: "+lastName+"\nULID: "+ulid);
 	}
 	
-	public void printStudentCourseSummary(){
-		course.printCourseSummary();
+	public String returnStudentCourseSummary(){
+		return course.returnCourseSummary();
 	}
 }

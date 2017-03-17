@@ -28,11 +28,12 @@ public class Course{
 		this.letterGrade=letterGrade;
 	}
 
-	public void printCourseSummary(){
-		System.out.println("Course Name: "+courseName+"\nCourse Time: "+courseSeason+courseYear
-				+"\nGrade Summary:");
+	public String returnCourseSummary(){
+		String toReturn="";
+		toReturn=("Course Name: "+courseName+"\nCourse Time: "+courseSeason+courseYear+"\nGrade Summary:");
 		for(int i=0; i<currentSize; i++){
-			System.out.println(grades[i].gradeTitle+": "+grades[i].grade);
+			toReturn+=(grades[i].gradeTitle+": "+grades[i].grade);
 		}
+		return toReturn;
 	}
 }

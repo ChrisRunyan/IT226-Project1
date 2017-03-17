@@ -6,8 +6,8 @@ package edu.ilstu;
  */
 public class DataReader {
 
-	private Student[] student = new Student[300];
-	private int studentArraySize=0;
+	public static Student[] student = new Student[300];
+	public static int studentArraySize=0;
 	private Course course=null;
 	private String courseName="";
 	private String courseYear="";
@@ -38,7 +38,6 @@ public class DataReader {
 			} else if (splice[0].equalsIgnoreCase("first name"))
 
 				formatFirstNameFirst(line1, lines[i], i);
-
 		}
 
 	}

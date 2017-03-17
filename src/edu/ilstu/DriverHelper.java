@@ -13,13 +13,13 @@ import java.util.Scanner;
  */
 public class DriverHelper {
 	DataReader dReader=new DataReader();
-	//**instantiate linked list here
 	
 	public void printMenu(){
 		System.out.print("Choices:\n\"A\": Add data (You will need to enter an input filename)"
 				+ "\n\"S\": Save data (You will need to enter a student ID and output filename)"
 				+ "\n\"G\": Return data (Returns student, grade, and course specific information)"
 				+ "\n\"E\": Exit the program"
+				+ "\nWARNING: If you do not add data, you cannot save or return data."
 				+ "\n\nEnter choice here: ");
 	}
 	
@@ -43,7 +43,6 @@ public class DriverHelper {
 		String courseYear="";
 		String courseSeason="";
 		String[] lines=new String[300];
-		Student[] studentArray=new Student[300];
 		int counter=0;
 		Scanner reader=null;
 		boolean validFileName=false;
@@ -89,58 +88,122 @@ public class DriverHelper {
 		dReader.setCourseYear(courseYear);
 		dReader.setCourseSeason(courseSeason);
 		dReader.formatData(firstLine, lines);
-		studentArray=dReader.returnStudentArray();
 		
-		//**add each student in studentArray to linked list using for loop, use counter to stop
+		//**cannot add more than one file at a time to the array: it re-writes everything existing in the file already
 		
 		System.out.println("Student data successfully added.\n");
+		
+		//**add print statements saying how many students were just added and how many students now exist in the array
+		
 		reader.close();
 	}
 	
 	public void optionS(Scanner kb){
 		String studentID="";
 		String outputFileName="";
+		boolean validStudentID=false;
+		PrintWriter writer=null;
+		int indexOfStudent=0;
 		
-		System.out.print("Enter student ID for student to save data from: ");
-		studentID=kb.nextLine();
+		while(!validStudentID){
+			System.out.print("Enter student ID for student to save data from: ");
+			studentID=kb.nextLine();
+			
+			for(int i=0; i<DataReader.studentArraySize; i++){
+				if(DataReader.student[i].ulid.equals(studentID)){
+					validStudentID=true;
+					indexOfStudent=i;
+				}
+			}
+		}
 		
-		//**validate student ID is associated with a real one, if not prompt until valid one is entered
-		
-		System.out.print("Enter the name of the text file the student's information should be saved to (firstname-lastname): ");
+		System.out.print("Enter the name of the .csv file the student's information should be saved to (firstname-lastname): ");
 		outputFileName=kb.nextLine();
 		
 		try{
-			PrintWriter writer=new PrintWriter(outputFileName+".txt");
-			
-			//**print student data from student id
+			writer=new PrintWriter(outputFileName+".csv");
 		}
 		catch(IOException e){
 			e.printStackTrace();
 		}
 		
+		//**use writer print column headings 
+		//**use writer print data for student (use indexOfStudent to statically find student in array)
 		
+		//**grade summary is not printing to output file?
+		
+		System.out.println("Student information successfully printed to "+outputFileName+".csv.\n");
+		writer.close();
 	}
 	
 	public void optionG(Scanner kb){
 		String studentID="";
 		String gradeName="";
-		String course="";
+		String courseS="";
+		Course course=null;
+		String season="";
+		String year="";
+		boolean validCourseInput=false;
+		boolean validSeasonInput=false;
+		boolean validYearInput=false;
 		
-		System.out.print("Enter student ID for student to print data from: ");
-		studentID=kb.nextLine();
+		while(!validCourseInput){
+			System.out.print("Enter course to print data from (type \"none\" to skip this input): ");
+			courseS=kb.nextLine();
+			
+			if(courseS.equalsIgnoreCase("none")){
+				validCourseInput=true;
+			}
+			else{
+				for(int i=0; i<DataReader.studentArraySize; i++){
+					if(DataReader.student[i].course.courseName.equalsIgnoreCase(courseS)){
+						validCourseInput=true;
+						course=DataReader.student[i].course;
+					}
+				}
+			}
+		}
 		
-		//**verify student is valid, if not prompt until valid entered
+		while(!validSeasonInput){
+			System.out.print("Enter to print data from (type \"none\" to skip this input): ");
+			season=kb.nextLine();
+			
+			if(season.equalsIgnoreCase("none")){
+				validCourseInput=true;
+			}
+			else{
+				for(int i=0; i<DataReader.studentArraySize; i++){
+					if(DataReader.student[i].course.courseSeason.equalsIgnoreCase(season)){
+						validCourseInput=true;
+					}
+				}
+			}
+		}
 		
-		System.out.print("Enter course for student to print data from: ");
-		course=kb.nextLine();
+		while(!validYearInput){
+			System.out.print("Enter year to print data from (type \"none\" to skip this input): ");
+			year=kb.nextLine();
+			
+			if(year.equalsIgnoreCase("none")){
+				validYearInput=true;
+			}
+			else{
+				for(int i=0; i<DataReader.studentArraySize; i++){
+					if(DataReader.student[i].course.courseYear.equalsIgnoreCase(year)){
+						validYearInput=true;
+					}
+				}
+			}
+		}
 		
-		//**verify student is associated with that course, if not, prompt until valid entered
+		if(!courseS.equalsIgnoreCase("none")){
+			if(!season.equalsIgnoreCase("none")||!year.equalsIgnoreCase("none")){
+				//**return array of integers for grades under following conditions:
+				//**if both course name and year/semester entered, only return grades for that course and year/semester
+				//**if no course name entered, only print grades for year/semester
+				//**if no semester/year entered, only print grades for coursename
+			}
+		}
 		
-		System.out.print("Enter name of assignment for grade information to print data from: ");
-		gradeName=kb.nextLine();
-		
-		//**verify gradeName is valid for student and course, if not prompt until valid entered
-		
-		//**print data for student, gradeName, and course
 	}
 }
