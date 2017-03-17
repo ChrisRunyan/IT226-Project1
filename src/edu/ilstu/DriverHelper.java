@@ -45,6 +45,25 @@ public class DriverHelper {
 		inputFileName=kb.nextLine();
 		try{
 			Scanner reader=new Scanner(new BufferedReader(new FileReader(inputFileName)));
+			//**If invalid filename, prompt until valid filename entered
+			
+			String courseTemp=inputFileName.substring(0, inputFileName.length()-4);
+			String courseName="";
+			String courseYear="";
+			String courseSeason="";
+			for(int i=0; i<courseTemp.length(); i++){
+				if(courseTemp.charAt(i)=='-'){
+					courseName=courseTemp.substring(0, i);
+					courseTemp=courseTemp.substring(i+1);
+					i=courseTemp.length();
+				}
+			}
+			for(int i=0; i<courseTemp.length(); i++){
+				if(courseTemp.charAt(i)=='-'){
+					courseSeason=courseTemp.substring(0, i);
+					courseYear=courseTemp.substring(i+1);
+				}
+			}
 			
 			firstLine=reader.nextLine();
 			while(reader.hasNextLine()){
@@ -52,9 +71,12 @@ public class DriverHelper {
 				counter++;
 			}
 			dReader.setStudentArraySize(counter);
+			dReader.setCourseName(courseName);
+			dReader.setCourseYear(courseYear);
+			dReader.setCourseSeason(courseSeason);
 			dReader.formatData(firstLine, lines);
 			studentArray=dReader.returnStudent();
-			//add each student in studentArray to linked list using for loop, use counter to stop
+			//**add each student in studentArray to linked list using for loop, use counter to stop
 			reader.close();
 		}
 		catch(FileNotFoundException e){
@@ -68,13 +90,13 @@ public class DriverHelper {
 		
 		System.out.print("Enter student ID for student to save data from: ");
 		studentID=kb.nextLine();
-		//validate student ID is associated with a real one
+		//**validate student ID is associated with a real one, if not prompt until valid one is entered
 		System.out.print("Enter the name of the text file the student's information should be saved to (firstname-lastname): ");
 		outputFileName=kb.nextLine();
 		
 		try{
 			PrintWriter writer=new PrintWriter(outputFileName+".txt");
-			//print student data from student id
+			//**print student data from student id
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -88,13 +110,13 @@ public class DriverHelper {
 		
 		System.out.print("Enter student ID for student to print data from: ");
 		studentID=kb.nextLine();
-		//verify student is valid
+		//**verify student is valid, if not prompt until valid entered
 		System.out.print("Enter course for student to print data from: ");
 		course=kb.nextLine();
-		//verify student is associated with that course
+		//**verify student is associated with that course, if not, prompt until valid entered
 		System.out.print("Enter name of assignment for grade information to print data from: ");
 		gradeName=kb.nextLine();
-		//verify gradename is valid for student and course
+		//**verify gradeName is valid for student and course, if not prompt until valid entered
 		
 		//print data for student, gradeName, and course
 	}

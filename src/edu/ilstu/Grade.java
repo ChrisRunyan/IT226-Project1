@@ -7,17 +7,17 @@ package edu.ilstu;
 public class Grade{
 	public String gradeTitle;
 	public double grade;
-	public Student student;
+	public String studentID;
 	
 	public Grade(){
 		this.gradeTitle=null;
 		this.grade=0.0;
 	}
 	
-	public Grade(String gradeTitle, double grade, Student student){
+	public Grade(String gradeTitle, double grade, String studentID){
 		this.gradeTitle=gradeTitle;
 		this.grade=grade;
-		this.student=student;
+		this.studentID=studentID;
 	}
 	
 	public double returnGrade(String gradeTitle){

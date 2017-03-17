@@ -20,8 +20,8 @@ public class Course{
 		currentSize=0;
 	}
 	
-	public void addGrades(String gradeTitle, double grade, Student student){
-		this.grades[currentSize]=new Grade(gradeTitle, grade, student);
+	public void addGrades(String gradeTitle, double grade, String studentID){
+		this.grades[currentSize]=new Grade(gradeTitle, grade, studentID);
 	}
 	
 	public void setLetterGrade(char letterGrade){

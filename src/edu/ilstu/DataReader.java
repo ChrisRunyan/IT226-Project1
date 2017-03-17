@@ -8,6 +8,10 @@ public class DataReader {
 
 	private Student[] student = new Student[300];
 	private int studentArraySize=0;
+	private Course course=null;
+	private String courseName="";
+	private String courseYear="";
+	private String courseSeason="";
 
 	/*
 	 * method that formats every line from a .csv in specific formats.
@@ -17,9 +21,10 @@ public class DataReader {
 	 */
 	public void formatData(String line1, String[] lines) {
 		String[] splice = line1.split(",");
+		
+		course=new Course(courseName, courseYear, courseSeason);
 
-		//Kevin: I added the array size of lines (studentArraySize) so the for loop doesn't have to loop 300 times
-		for (int i = 0; i < lines.length; i++) {
+		for (int i = 0; i < studentArraySize; i++) {
 			student[i]=new Student();
 			
 			if (splice[0].equalsIgnoreCase("student name")) {
@@ -75,8 +80,10 @@ public class DataReader {
 			assignmentGrades[j] = splice[j+3];
 		}
 
+		student[studentNum].addCourse(course);
+		
 		//sends both arrays to get processed by a "setAssignmentGrades()" method
-		student[studentNum].addGrades(assignmentNames, assignmentGrades);
+		student[studentNum].addGrades(assignmentNames, assignmentGrades, (splice.length-4));
 		
 		//sends final letter grade to get processed
 		student[studentNum].addLetterGrade(splice[splice.length-1]);
@@ -122,8 +129,10 @@ public class DataReader {
 			assignmentGrades[j] = splice[j+3];
 		}
 
+		student[studentNum].addCourse(course);
+		
 		//sends both arrays to get processed by a "setAssignmentGrades()" method
-		student[studentNum].addGrades(assignmentNames, assignmentGrades);
+		student[studentNum].addGrades(assignmentNames, assignmentGrades, (splice.length-4));
 		
 		//sends final letter grade to get processed
 		student[studentNum].addLetterGrade(splice[splice.length-1]);
@@ -169,9 +178,11 @@ public class DataReader {
 		for (int j = 0; j < (splice.length - 4) ; j++){
 			assignmentGrades[j] = splice[j+3];
 		}
-
+		
+		student[studentNum].addCourse(course);
+		
 		//sends both arrays to get processed by a "setAssignmentGrades()" method
-		student[studentNum].addGrades(assignmentNames, assignmentGrades);
+		student[studentNum].addGrades(assignmentNames, assignmentGrades, (splice.length-4));
 		
 		//sends final letter grade to get processed
 		student[studentNum].addLetterGrade(splice[splice.length-1]);
@@ -184,5 +195,25 @@ public class DataReader {
 	
 	public void setStudentArraySize(int size){
 		studentArraySize=size;
+	}
+	
+	public Course returnCourse(){
+		return course;
+	}
+	
+	public void setCourse(Course course){
+		this.course=course;
+	}
+	
+	public void setCourseName(String courseName){
+		this.courseName=courseName;
+	}
+	
+	public void setCourseYear(String courseYear){
+		this.courseYear=courseYear;
+	}
+	
+	public void setCourseSeason(String courseSeason){
+		this.courseSeason=courseSeason;
 	}
 }

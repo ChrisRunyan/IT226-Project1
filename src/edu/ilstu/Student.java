@@ -34,16 +34,19 @@ public class Student{
 		this.ulid=ulid;
 	}
 	
-	public void addGrades(String[] assignmentNames, String[] assignmentGrades){
+	public void addGrades(String[] assignmentNames, String[] assignmentGrades, int assignmentGradesSize){
 		double[] assignmentGradesD=new double[50];
 		
-		for(int i=0; i<50; i++){
+		for(int i=0; i<assignmentGradesSize; i++){
 			System.out.println("assignmentGrades[i]: "+assignmentGrades[i]);
 			assignmentGradesD[i]=Double.parseDouble(assignmentGrades[i]);
 		}
 		
-		for(int i=0; i<50; i++){
-			this.course.addGrades(assignmentNames[i], assignmentGradesD[i], this);
+		for(int i=0; i<assignmentGradesSize; i++){
+			System.out.println("ulid: "+ulid);
+			System.out.println("assignmentNames[i]: "+assignmentNames[i]);
+			System.out.println("assignmentGradesD[i]: "+assignmentGradesD[i]);
+			this.course.addGrades(assignmentNames[i], assignmentGradesD[i], ulid);
 		}
 	}
 	
