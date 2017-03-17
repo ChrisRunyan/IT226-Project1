@@ -38,14 +38,10 @@ public class Student{
 		double[] assignmentGradesD=new double[50];
 		
 		for(int i=0; i<assignmentGradesSize; i++){
-			System.out.println("assignmentGrades[i]: "+assignmentGrades[i]);
 			assignmentGradesD[i]=Double.parseDouble(assignmentGrades[i]);
 		}
 		
 		for(int i=0; i<assignmentGradesSize; i++){
-			System.out.println("ulid: "+ulid);
-			System.out.println("assignmentNames[i]: "+assignmentNames[i]);
-			System.out.println("assignmentGradesD[i]: "+assignmentGradesD[i]);
 			this.course.addGrades(assignmentNames[i], assignmentGradesD[i], ulid);
 		}
 	}

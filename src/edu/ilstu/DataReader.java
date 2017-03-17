@@ -189,7 +189,7 @@ public class DataReader {
 	
 	}
 	
-	public Student[] returnStudent(){
+	public Student[] returnStudentArray(){
 		return student;
 	}
 	
