@@ -49,7 +49,7 @@ public class DataReader {
 	 * is the number of the student in the array of Students()
 	 */
 	private void formatIDFirst(String line1, String line, int studentNum) {
-		// splice of line 1
+		// splice of line 1 
 		String[] splice1 = line1.split(",");
 
 		// splice of the individual student's line

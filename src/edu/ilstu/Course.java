@@ -12,6 +12,34 @@ public class Course{
 	public int currentSize;
 	public char letterGrade;
 	
+	
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getCourseYear() {
+		return courseYear;
+	}
+
+	public void setCourseYear(String courseYear) {
+		this.courseYear = courseYear;
+	}
+
+	public String getCourseSeason() {
+		return courseSeason;
+	}
+
+	public void setCourseSeason(String courseSeason) {
+		this.courseSeason = courseSeason;
+	}
+	public char getLetterGrade() {
+		return letterGrade;
+	}
+
 	public Course(String courseName, String courseYear, String courseSeason){
 		this.courseName=courseName;
 		this.courseYear=courseYear;

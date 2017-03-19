@@ -1,5 +1,6 @@
 package edu.ilstu;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -11,6 +12,8 @@ public class Driver{
 		// create menu with options
 		Scanner kb=new Scanner(System.in);
 		DriverHelper dHelp=new DriverHelper();
+		DataReader dReader=new DataReader();
+		 LinkedList<Student> student = new LinkedList<Student>();
 		String input="";
 		
 		System.out.println("Welcome to the Student Data Integration and Viewer Program (SDIVP).");
@@ -24,13 +27,15 @@ public class Driver{
 			}
 			if(!input.equalsIgnoreCase("E")){
 				if(input.equalsIgnoreCase("A")){
-					dHelp.optionA(kb);
+					dHelp.setdReader(dReader);
+					dHelp.optionA(kb,student);
+				
 				}
 				else if(input.equalsIgnoreCase("S")){
-					dHelp.optionS(kb);
+					dHelp.optionS(kb,student);
 				}
 				else if(input.equalsIgnoreCase("G")){
-					dHelp.optionG(kb);
+					dHelp.optionG(kb, student);
 				}
 			}
 		}

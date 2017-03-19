@@ -1,14 +1,42 @@
 package edu.ilstu;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author Christopher Runyan
  */
 public class Student{
 	public String firstName;
+	
 	public String lastName;
 	public String ulid;
 	public Course course;
+	
+	
+	public String getUlid() {
+		return ulid;
+	}
+
+	public void setUlid(String ulid) {
+		this.ulid = ulid;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
 	
 	public Student(){
 		this.firstName=null;
@@ -62,5 +90,9 @@ public class Student{
 	
 	public String returnStudentCourseSummary(){
 		return course.returnCourseSummary();
+	}
+	public String toString1(){
+		return "Student Id"+","+ "Course"+ "," + "Semester" + ","+  "Year"+ ","+
+				"Assignment name" + "," + "Points" ;
 	}
 }
