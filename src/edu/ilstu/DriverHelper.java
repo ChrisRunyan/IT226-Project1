@@ -126,11 +126,11 @@ public class DriverHelper {
 		while(!validStudentID){
 			System.out.print("Enter student ID for student to save data from: ");
 			studentID=kb.nextLine();
-			
-			for(int i=0; i<=student.size(); i++){
-				if(student.get(i).ulid.equals(studentID)){
+			for(int i=0; i<student.size(); i++){
+				if(student.get(i).getUlid().equals(studentID)){
 					validStudentID=true;
 					indexOfStudent=i;
+					
 				}
 			}
 		}
@@ -176,19 +176,26 @@ public class DriverHelper {
         sb.append(',');
         sb.append( student.get(indexOfStudent).course.grades[0].grade);
         sb.append('\n');
+        
+        
+        
         for(int i = 1; i< student.get(indexOfStudent).course.grades.length; i++){
-        	sb.append("");
-	        sb.append(',');
-	        sb.append("");
-	        sb.append(',');
-	        sb.append("");
-	        sb.append(',');
-	        sb.append("");
-	        sb.append(',');
-	        sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
-	        sb.append(',');
-	        sb.append( student.get(indexOfStudent).course.grades[i].grade);
-	        sb.append('\n');
+
+ 
+            	sb.append("");
+    	        sb.append(',');
+    	        sb.append("");
+    	        sb.append(',');
+    	        sb.append("");
+    	        sb.append(',');
+    	        sb.append("");
+    	        sb.append(',');
+    	        sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
+    	        sb.append(',');
+    	        sb.append( student.get(indexOfStudent).course.grades[i].grade);
+    	        sb.append('\n');
+        	
+        	
         }
         
         writer.write(sb.toString());

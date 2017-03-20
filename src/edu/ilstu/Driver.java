@@ -12,6 +12,7 @@ public class Driver{
 		// create menu with options
 		Scanner kb=new Scanner(System.in);
 		DriverHelper dHelp=new DriverHelper();
+		Grade a = new Grade();
 		DataReader dReader=new DataReader();
 		 LinkedList<Student> student = new LinkedList<Student>();
 		String input="";
@@ -24,12 +25,13 @@ public class Driver{
 				System.out.println("Invalid input.");
 				dHelp.printMenu();
 				input=kb.nextLine();
+				
 			}
 			if(!input.equalsIgnoreCase("E")){
 				if(input.equalsIgnoreCase("A")){
 					dHelp.setdReader(dReader);
 					dHelp.optionA(kb,student);
-				
+					
 				}
 				else if(input.equalsIgnoreCase("S")){
 					dHelp.optionS(kb,student);
