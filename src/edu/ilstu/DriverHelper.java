@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Christopher Runyan
+ * @author Christopher Runyan, Hoang Le
  */
 public class DriverHelper {
 	DataReader dReader=new DataReader();
@@ -98,9 +98,7 @@ public class DriverHelper {
 		dReader.setCourseSeason(courseSeason);
 		dReader.formatData(firstLine, lines);
 		
-		//**cannot add more than one file at a time to the array: it re-writes everything existing in the file already
-		
-		System.out.println("Student data successfully added.\n");
+		System.out.println("Student data successfully added.");
 		Student[] std = new Student[300];
 		
 		std = dReader.returnStudentArray();
@@ -110,8 +108,7 @@ public class DriverHelper {
 			j= j+ 1;
 		}
 		
-		//**add print statements saying how many students were just added and how many students now exist in the array
-		System.out.println("there are : " + (student.size()) + " students in the list");
+		System.out.println("There are " + (student.size()) + " students in the list.\n");
 	
 		reader.close();
 	}
@@ -133,6 +130,9 @@ public class DriverHelper {
 					
 				}
 			}
+			if(!validStudentID){
+				System.out.println("Invalid student ID entered. Try again.");
+			}
 		}
 		
 		System.out.print("Enter the name of the .csv file the student's information should be saved to (firstname-lastname): ");
@@ -145,11 +145,6 @@ public class DriverHelper {
 			e.printStackTrace();
 		}
 		
-		
-		//**use writer print column headings 
-		//**use writer print data for student (use indexOfStudent to statically find student in array)
-		
-		//**grade summary is not printing to output file?
 		StringBuilder sb = new StringBuilder();
 	 	sb.append("Student Id");
         sb.append(',');
@@ -177,11 +172,7 @@ public class DriverHelper {
         sb.append( student.get(indexOfStudent).course.grades[0].grade);
         sb.append('\n');
         
-        
-        
         for(int i = 1; i< student.get(indexOfStudent).course.grades.length; i++){
-
- 
             	sb.append("");
     	        sb.append(',');
     	        sb.append("");
@@ -194,54 +185,45 @@ public class DriverHelper {
     	        sb.append(',');
     	        sb.append( student.get(indexOfStudent).course.grades[i].grade);
     	        sb.append('\n');
-        	
-        	
-        }
-        
+       }
         writer.write(sb.toString());
-	        System.out.println("Student information successfully printed to "+outputFileName+".csv.\n");
-	        writer.close();
+	    System.out.println("Student information successfully printed to "+outputFileName+".csv.\n");
+	    writer.close();
 	}
 	
-	
 	private static void printArray(int[] anArray) {
-	      for (int i = 0; i < anArray.length; i++) {
-	         if (i > 0) {
-	            System.out.print(", ");
-	         }
-	         System.out.print(anArray[i]);
-	      }
-	   }
+		for (int i = 0; i < anArray.length; i++) {
+			if (i > 0) {
+				System.out.print(", ");
+	        }
+	        System.out.print(anArray[i]);
+	    }
+		System.out.println("\n");
+	}
 	
 	public void optionG(Scanner kb,LinkedList<Student> student){
-		String studentID="";
-		String gradeName="";
 		String courseS="";
-		Course course=null;
 		String season="";
 		String year="";
 		
 		boolean check = true;
-		while(check = true){
+		while(check==true){
 			System.out.print("Enter course to print data from (type \"none\" to skip this input): ");
 			courseS=kb.nextLine();
-			kb.nextLine();
 			System.out.print("Enter semester to print data from (type \"none\" to skip this input): ");
 			season=kb.nextLine();
-			kb.nextLine();
 			System.out.print("Enter year to print data from (type \"none\" to skip this input): ");
 			year=kb.nextLine();
-			kb.nextLine();
 			
-			if(courseS.equalsIgnoreCase("none") && season.equalsIgnoreCase("none") && year != "none"){
-				System.out.println("not enough information ");
+			if(courseS.equalsIgnoreCase("none") && season.equalsIgnoreCase("none") && !year.equalsIgnoreCase("none")){
+				System.out.println("Not enough information entered.\n");
 				check= false;
 			}
-			if(courseS.equalsIgnoreCase("none") && year.equalsIgnoreCase("none") && season != "none"){
-				System.out.println("not enough information ");
+			else if(courseS.equalsIgnoreCase("none") && year.equalsIgnoreCase("none") && !season.equalsIgnoreCase("none")){
+				System.out.println("Not enough information entered.\n");
 				check= false;
 			}
-			if(courseS.equalsIgnoreCase("none") && season != "none" && year.equalsIgnoreCase("none")){
+			else if(courseS.equalsIgnoreCase("none") && !season.equalsIgnoreCase("none") && year.equalsIgnoreCase("none")){
 				int a= 0;
 				int b = 0;
 				int c = 0;
@@ -270,10 +252,11 @@ public class DriverHelper {
 				
 				int[] array = {a,b,c,d,f};
 				printArray(array);
+				check=false;
 			}
 			
 			
-			if(courseS.equalsIgnoreCase("none") && year != "none" && season.equalsIgnoreCase("none")){
+			else if(courseS.equalsIgnoreCase("none") && !year.equalsIgnoreCase("none") && season.equalsIgnoreCase("none")){
 				int a= 0;
 				int b = 0;
 				int c = 0;
@@ -301,10 +284,13 @@ public class DriverHelper {
 				}
 				int[] array = {a,b,c,d,f};
 				printArray(array);
+				check=false;
 			}
-			if(season.equalsIgnoreCase("none") && year.equalsIgnoreCase("none")){
+			
+			else if(season.equalsIgnoreCase("none") && year.equalsIgnoreCase("none")){
 				if(courseS.equalsIgnoreCase("none")){
 					check = false;
+					System.out.println("Not enough information entered.\n");
 				}
 				else{
 					int a= 0;
@@ -335,8 +321,10 @@ public class DriverHelper {
 					int[] array = {a,b,c,d,f};
 					printArray(array);
 				}
-				}
-			if (courseS!="none" && year != "none" && season != "none"){
+				check=false;
+			}
+			
+			else if (!courseS.equalsIgnoreCase("none") && !year.equalsIgnoreCase("none") && !season.equalsIgnoreCase("none")){
 				int a= 0;
 				int b = 0;
 				int c = 0;
@@ -366,9 +354,10 @@ public class DriverHelper {
 				}
 				int[] array = {a,b,c,d,f};
 				printArray(array);
+				check=false;
 			}
 			
-			if (courseS.equalsIgnoreCase("none") && year != "none" && season != "none"){
+			else if (courseS.equalsIgnoreCase("none") && !year.equalsIgnoreCase("none") && !season.equalsIgnoreCase("none")){
 				int a= 0;
 				int b = 0;
 				int c = 0;
@@ -392,15 +381,12 @@ public class DriverHelper {
 						if (student.get(i).course.getLetterGrade() == 'F'){
 							f = f + 1;
 							}
-						
 					}
 				}
 				int[] array = {a,b,c,d,f};
 				printArray(array);
-			}
-			
-				
+				check=false;
+			}	
 		}
 	}
-		
 }

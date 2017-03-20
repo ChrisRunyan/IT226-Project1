@@ -1,18 +1,14 @@
 package edu.ilstu;
 
-import java.util.Arrays;
-
 /**
  * 
  * @author Christopher Runyan
  */
 public class Student{
 	public String firstName;
-	
 	public String lastName;
 	public String ulid;
 	public Course course;
-	
 	
 	public String getUlid() {
 		return ulid;

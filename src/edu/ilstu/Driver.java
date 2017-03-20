@@ -9,10 +9,8 @@ import java.util.Scanner;
  */
 public class Driver{
 	public static void main(String[] args){
-		// create menu with options
 		Scanner kb=new Scanner(System.in);
 		DriverHelper dHelp=new DriverHelper();
-		Grade a = new Grade();
 		DataReader dReader=new DataReader();
 		 LinkedList<Student> student = new LinkedList<Student>();
 		String input="";

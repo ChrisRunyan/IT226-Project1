@@ -12,7 +12,6 @@ public class Course{
 	public int currentSize;
 	public char letterGrade;
 	
-	
 	public String getCourseName() {
 		return courseName;
 	}
