@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 public class DriverHelper {
 	DataReader dReader=new DataReader();
+	int gradesSize=0;
 	
 	public DataReader getdReader() {
 		return dReader;
@@ -120,6 +121,8 @@ public class DriverHelper {
 		PrintWriter writer=null;
 		int indexOfStudent=0;
 		
+		this.gradesSize=student.get(0).course.returnCurrentSize();
+		
 		while(!validStudentID){
 			System.out.print("Enter student ID for student to save data from: ");
 			studentID=kb.nextLine();
@@ -172,7 +175,7 @@ public class DriverHelper {
         sb.append( student.get(indexOfStudent).course.grades[0].grade);
         sb.append('\n');
         
-        for(int i = 1; i< student.get(indexOfStudent).course.grades.length; i++){
+        for(int i = 1; i< gradesSize; i++){
             	sb.append("");
     	        sb.append(',');
     	        sb.append("");
@@ -183,7 +186,7 @@ public class DriverHelper {
     	        sb.append(',');
     	        sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
     	        sb.append(',');
-    	        sb.append( student.get(indexOfStudent).course.grades[i].grade);
+    	        sb.append(student.get(indexOfStudent).course.grades[i].grade);
     	        sb.append('\n');
        }
         writer.write(sb.toString());

@@ -43,12 +43,13 @@ public class Course{
 		this.courseName=courseName;
 		this.courseYear=courseYear;
 		this.courseSeason=courseSeason;
-		this.grades=new Grade[50];
+		this.grades=new Grade[1000];
 		currentSize=0;
 	}
 	
 	public void addGrades(String gradeTitle, double grade, String studentID){
 		this.grades[currentSize]=new Grade(gradeTitle, grade, studentID);
+		currentSize++;
 	}
 	
 	public void setLetterGrade(char letterGrade){
@@ -62,5 +63,9 @@ public class Course{
 			toReturn+=(grades[i].gradeTitle+": "+grades[i].grade);
 		}
 		return toReturn;
+	}
+	
+	public int returnCurrentSize(){
+		return currentSize;
 	}
 }
