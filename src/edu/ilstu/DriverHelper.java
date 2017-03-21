@@ -170,13 +170,17 @@ public class DriverHelper {
         sb.append(',');
         sb.append(student.get(indexOfStudent).course.courseYear);
         sb.append(',');
-        sb.append(student.get(indexOfStudent).course.grades[0].gradeTitle);
-        sb.append(',');
-        sb.append( student.get(indexOfStudent).course.grades[0].grade);
-        sb.append('\n');
         
-        for(int i = 1; i< gradesSize; i++){
-            	sb.append("");
+        for(int i=0; i<gradesSize; i++){
+        	int counter=0;
+        	if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter<1)){
+        		sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
+                sb.append(',');
+                sb.append(student.get(indexOfStudent).course.grades[i].grade);
+                sb.append('\n');
+        	}
+        	else if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter==1)){
+        		sb.append("");
     	        sb.append(',');
     	        sb.append("");
     	        sb.append(',');
@@ -188,7 +192,10 @@ public class DriverHelper {
     	        sb.append(',');
     	        sb.append(student.get(indexOfStudent).course.grades[i].grade);
     	        sb.append('\n');
-       }
+        	}
+        	counter++;
+        }
+        
         writer.write(sb.toString());
 	    System.out.println("Student information successfully printed to "+outputFileName+".csv.\n");
 	    writer.close();
