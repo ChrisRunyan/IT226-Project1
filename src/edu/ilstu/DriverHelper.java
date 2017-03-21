@@ -178,6 +178,14 @@ public class DriverHelper {
                 sb.append(',');
                 sb.append(student.get(indexOfStudent).course.grades[i].grade);
                 sb.append('\n');
+                sb.append("");
+    	        sb.append(',');
+    	        sb.append("");
+    	        sb.append(',');
+    	        sb.append("");
+    	        sb.append(',');
+    	        sb.append("");
+    	        sb.append(',');
         	}
         	else if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter==1)){
         		sb.append("");
@@ -359,9 +367,9 @@ public class DriverHelper {
 						if (student.get(i).course.getLetterGrade() == 'F'){
 							f = f + 1;
 							}
-						
 					}
 				}
+				
 				int[] array = {a,b,c,d,f};
 				printArray(array);
 				check=false;
