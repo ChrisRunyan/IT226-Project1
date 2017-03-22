@@ -45,6 +45,28 @@ public class DriverHelper {
 		return valid;
 	}
 	
+	void printArray(int[] returnArray){
+		for(int i=0; i<5; i++){
+			switch(i){
+			case 0:
+				System.out.println("Number of A's: "+returnArray[i]);
+				break;
+			case 1:
+				System.out.println("Number of B's: "+returnArray[i]);
+				break;
+			case 2:
+				System.out.println("Number of C's: "+returnArray[i]);
+				break;
+			case 3:
+				System.out.println("Number of D's: "+returnArray[i]);
+				break;
+			case 4:
+				System.out.println("Number of F's: "+returnArray[i]);
+			}
+		}
+		System.out.println("");
+	}
+	
 	public void optionA(Scanner kb, LinkedList<Student> student){
 		String inputFileName="";
 		String firstLine="";
@@ -70,7 +92,7 @@ public class DriverHelper {
 			}
 		}
 		
-		courseTemp=inputFileName.substring(0, inputFileName.length()-4);
+		courseTemp=inputFileName;
 		
 		for(int i=0; i<courseTemp.length(); i++){
 			if(courseTemp.charAt(i)=='-'){
@@ -274,47 +296,29 @@ public class DriverHelper {
 		
 		if(!courseS.equalsIgnoreCase("none")&&season.equalsIgnoreCase("none")&&year.equalsIgnoreCase("none")){
 			System.out.println("Student information for "+courseS+" throughout all semesters and years:");
-				for(int k=0; k<student.size(); k++){
-					if(student.get(k).course.courseName.equals(courseS)){
-						if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
-							returnArray[0]++;
-						}
-						else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
-							returnArray[1]++;
-						}
-						else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
-							returnArray[2]++;
-						}
-						else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
-							returnArray[3]++;
-						}
-						else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
-							returnArray[4]++;
-						}
+			for(int k=0; k<student.size(); k++){
+				if(student.get(k).course.courseName.equals(courseS)){
+					if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
+						returnArray[0]++;
+					}
+					else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
+						returnArray[1]++;
+					}
+					else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
+						returnArray[2]++;
+					}
+					else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
+						returnArray[3]++;
+					}
+					else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
+						returnArray[4]++;
 					}
 				}
-			for(int i=0; i<5; i++){
-				switch(i){
-				case 0:
-					System.out.println("Number of A's: "+returnArray[i]);
-					break;
-				case 1:
-					System.out.println("Number of B's: "+returnArray[i]);
-					break;
-				case 2:
-					System.out.println("Number of C's: "+returnArray[i]);
-					break;
-				case 3:
-					System.out.println("Number of D's: "+returnArray[i]);
-					break;
-				case 4:
-					System.out.println("Number of F's: "+returnArray[i]);
-				}
 			}
-			System.out.println("");
+			printArray(returnArray);
 		}
 		else if(courseS.equalsIgnoreCase("none")&&!season.equalsIgnoreCase("none")&&!year.equalsIgnoreCase("none")){
-			System.out.println("Student information for all courses in "+season+" "+year+":\n");
+			System.out.println("Student information for all courses in "+season+" "+year+":");
 			for(int k=0; k<student.size(); k++){
 				if(student.get(k).course.courseSeason.equals(season)&&student.get(k).course.courseYear.equals(year)){
 					if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
@@ -334,28 +338,10 @@ public class DriverHelper {
 					}
 				}
 			}
-			for(int i=0; i<5; i++){
-				switch(i){
-				case 0:
-					System.out.println("Number of A's: "+returnArray[i]);
-					break;
-				case 1:
-					System.out.println("Number of B's: "+returnArray[i]);
-					break;
-				case 2:
-					System.out.println("Number of C's: "+returnArray[i]);
-					break;
-				case 3:
-					System.out.println("Number of D's: "+returnArray[i]);
-					break;
-				case 4:
-					System.out.println("Number of F's: "+returnArray[i]);
-				}
-			}
-			System.out.println("");
+			printArray(returnArray);
 		}
 		else if(!courseS.equalsIgnoreCase("none")&&!season.equalsIgnoreCase("none")&&!year.equalsIgnoreCase("none")){
-			System.out.println("Student information for "+courseS+" in "+season+" "+year+":\n");
+			System.out.println("Student information for "+courseS+" in "+season+" "+year+":");
 			for(int k=0; k<student.size(); k++){
 				if(student.get(k).course.courseSeason.equals(season)&&student.get(k).course.courseYear.equals(year)&&student.get(k).course.courseName.equals(courseS)){
 					if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
@@ -375,25 +361,7 @@ public class DriverHelper {
 					}
 				}
 			}
-			for(int i=0; i<5; i++){
-				switch(i){
-				case 0:
-					System.out.println("Number of A's: "+returnArray[i]);
-					break;
-				case 1:
-					System.out.println("Number of B's: "+returnArray[i]);
-					break;
-				case 2:
-					System.out.println("Number of C's: "+returnArray[i]);
-					break;
-				case 3:
-					System.out.println("Number of D's: "+returnArray[i]);
-					break;
-				case 4:
-					System.out.println("Number of F's: "+returnArray[i]);
-				}
-			}
-			System.out.println("");
+			printArray(returnArray);
 		}
 		else{
 			System.out.println("Not enough information entered.\n");
