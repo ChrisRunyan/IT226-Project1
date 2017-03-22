@@ -172,89 +172,94 @@ public class DriverHelper {
 		PrintWriter writer=null;
 		int indexOfStudent=0;
 		
-		while(!validStudentID){
-			System.out.print("Enter student ID for student to save data from: ");
-			studentID=kb.nextLine();
-			for(int i=0; i<student.size(); i++){
-				if(student.get(i).getUlid().equals(studentID)){
-					validStudentID=true;
-					indexOfStudent=i;
+		if(student.size()!=0){
+			while(!validStudentID){
+				System.out.print("Enter student ID for student to save data from: ");
+				studentID=kb.nextLine();
+				for(int i=0; i<student.size(); i++){
+					if(student.get(i).getUlid().equals(studentID)){
+						validStudentID=true;
+						indexOfStudent=i;
+					}
+				}
+				if(!validStudentID){
+					System.out.println("Invalid student ID entered. Try again.");
 				}
 			}
-			if(!validStudentID){
-				System.out.println("Invalid student ID entered. Try again.");
+			
+			System.out.print("Enter the name of the .csv file the student's information should be saved to (firstname-lastname): ");
+			outputFileName=kb.nextLine();
+			
+			try{
+				writer=new PrintWriter(outputFileName+".csv");
 			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+			
+			StringBuilder sb = new StringBuilder();
+		 	sb.append("Student Id");
+	        sb.append(',');
+	        sb.append("Course");
+	        sb.append(',');
+	        sb.append("Semester");
+	        sb.append(',');
+	        sb.append("Year");
+	        sb.append(',');
+	        sb.append("Assignment name");
+	        sb.append(',');
+	        sb.append( "Points");
+	        sb.append('\n');
+	        
+	        sb.append(student.get(indexOfStudent).getUlid());
+	        sb.append(',');
+	        sb.append(student.get(indexOfStudent).course.courseName);
+	        sb.append(',');
+	        sb.append(student.get(indexOfStudent).course.courseSeason);
+	        sb.append(',');
+	        sb.append(student.get(indexOfStudent).course.courseYear);
+	        sb.append(',');
+	        
+	        for(int i=0; i<gradesSize; i++){
+	        	int counter=0;
+	        	if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter<1)){
+	        		sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
+	                sb.append(',');
+	                sb.append(student.get(indexOfStudent).course.grades[i].grade);
+	                sb.append('\n');
+	                sb.append("");
+	    	        sb.append(',');
+	    	        sb.append("");
+	    	        sb.append(',');
+	    	        sb.append("");
+	    	        sb.append(',');
+	    	        sb.append("");
+	    	        sb.append(',');
+	        	}
+	        	else if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter==1)){
+	        		sb.append("");
+	    	        sb.append(',');
+	    	        sb.append("");
+	    	        sb.append(',');
+	    	        sb.append("");
+	    	        sb.append(',');
+	    	        sb.append("");
+	    	        sb.append(',');
+	    	        sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
+	    	        sb.append(',');
+	    	        sb.append(student.get(indexOfStudent).course.grades[i].grade);
+	    	        sb.append('\n');
+	        	}
+	        	counter++;
+	        }
+	        
+	        writer.write(sb.toString());
+		    System.out.println("Student information successfully printed to "+outputFileName+".csv.\n");
+		    writer.close();
 		}
-		
-		System.out.print("Enter the name of the .csv file the student's information should be saved to (firstname-lastname): ");
-		outputFileName=kb.nextLine();
-		
-		try{
-			writer=new PrintWriter(outputFileName+".csv");
+		else{
+			System.out.println("You must add data before you can save data.\n");
 		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		StringBuilder sb = new StringBuilder();
-	 	sb.append("Student Id");
-        sb.append(',');
-        sb.append("Course");
-        sb.append(',');
-        sb.append("Semester");
-        sb.append(',');
-        sb.append("Year");
-        sb.append(',');
-        sb.append("Assignment name");
-        sb.append(',');
-        sb.append( "Points");
-        sb.append('\n');
-        
-        sb.append(student.get(indexOfStudent).getUlid());
-        sb.append(',');
-        sb.append(student.get(indexOfStudent).course.courseName);
-        sb.append(',');
-        sb.append(student.get(indexOfStudent).course.courseSeason);
-        sb.append(',');
-        sb.append(student.get(indexOfStudent).course.courseYear);
-        sb.append(',');
-        
-        for(int i=0; i<gradesSize; i++){
-        	int counter=0;
-        	if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter<1)){
-        		sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
-                sb.append(',');
-                sb.append(student.get(indexOfStudent).course.grades[i].grade);
-                sb.append('\n');
-                sb.append("");
-    	        sb.append(',');
-    	        sb.append("");
-    	        sb.append(',');
-    	        sb.append("");
-    	        sb.append(',');
-    	        sb.append("");
-    	        sb.append(',');
-        	}
-        	else if(student.get(indexOfStudent).course.grades[i].studentID.equals(student.get(indexOfStudent).ulid)&&(counter==1)){
-        		sb.append("");
-    	        sb.append(',');
-    	        sb.append("");
-    	        sb.append(',');
-    	        sb.append("");
-    	        sb.append(',');
-    	        sb.append("");
-    	        sb.append(',');
-    	        sb.append(student.get(indexOfStudent).course.grades[i].gradeTitle);
-    	        sb.append(',');
-    	        sb.append(student.get(indexOfStudent).course.grades[i].grade);
-    	        sb.append('\n');
-        	}
-        	counter++;
-        }
-        
-        writer.write(sb.toString());
-	    System.out.println("Student information successfully printed to "+outputFileName+".csv.\n");
-	    writer.close();
 	}
 	
 	public void optionG(Scanner kb,LinkedList<Student> student){
@@ -266,129 +271,134 @@ public class DriverHelper {
 		boolean validYear=false;
 		int[] returnArray=new int[5];
 		
-		while(!validCourse){
-			System.out.print("Enter course to print data from (type \"none\" to skip this input): ");
-			courseS=kb.nextLine();
-			for(int i=0; i<student.size(); i++){
-				if(student.get(i).course.courseName.equals(courseS)){
-					validCourse=true;
-				}
-				else if(courseS.equalsIgnoreCase("none")){
-					validCourse=true;
-				}
-			}
-			if(!validCourse){
-				System.out.println("Invalid course name entered. Try again.");
-			}
-		}
-		
-		while(!validSeason){
-			System.out.print("Enter semester to print data from (type \"none\" to skip this input): ");
-			season=kb.nextLine();
-			for(int i=0; i<student.size(); i++){
-				if(student.get(i).course.courseSeason.equals(season)){
-					validSeason=true;
-				}
-				else if(season.equalsIgnoreCase("none")){
-					validSeason=true;
-				}
-			}
-			if(!validSeason){
-				System.out.println("Invalid course season entered. Try again.");
-			}
-		}
-		
-		while(!validYear){
-			System.out.print("Enter year to print data from (type \"none\" to skip this input): ");
-			year=kb.nextLine();
-			for(int i=0; i<student.size(); i++){
-				if(student.get(i).course.courseYear.equals(year)){
-					validYear=true;
-				}
-				else if(year.equalsIgnoreCase("none")){
-					validYear=true;
-				}
-			}
-			if(!validYear){
-				System.out.println("Invalid course year entered. Try again.");
-			}
-		}
-		
-		for(int i=0; i<5; i++){
-			returnArray[i]=0;
-		}
-		
-		if(!courseS.equalsIgnoreCase("none")&&season.equalsIgnoreCase("none")&&year.equalsIgnoreCase("none")){
-			System.out.println("Student information for "+courseS+" throughout all semesters and years:");
-			for(int k=0; k<student.size(); k++){
-				if(student.get(k).course.courseName.equals(courseS)){
-					if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
-						returnArray[0]++;
+		if(student.size()!=0){
+			while(!validCourse){
+				System.out.print("Enter course to print data from (type \"none\" to skip this input): ");
+				courseS=kb.nextLine();
+				for(int i=0; i<student.size(); i++){
+					if(student.get(i).course.courseName.equals(courseS)){
+						validCourse=true;
 					}
-					else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
-						returnArray[1]++;
-					}
-					else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
-						returnArray[2]++;
-					}
-					else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
-						returnArray[3]++;
-					}
-					else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
-						returnArray[4]++;
+					else if(courseS.equalsIgnoreCase("none")){
+						validCourse=true;
 					}
 				}
-			}
-			printArray(returnArray);
-		}
-		else if(courseS.equalsIgnoreCase("none")&&!season.equalsIgnoreCase("none")&&!year.equalsIgnoreCase("none")){
-			System.out.println("Student information for all courses in "+season+" "+year+":");
-			for(int k=0; k<student.size(); k++){
-				if(student.get(k).course.courseSeason.equals(season)&&student.get(k).course.courseYear.equals(year)){
-					if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
-						returnArray[0]++;
-					}
-					else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
-						returnArray[1]++;
-					}
-					else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
-						returnArray[2]++;
-					}
-					else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
-						returnArray[3]++;
-					}
-					else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
-						returnArray[4]++;
-					}
+				if(!validCourse){
+					System.out.println("Invalid course name entered. Try again.");
 				}
 			}
-			printArray(returnArray);
-		}
-		else if(!courseS.equalsIgnoreCase("none")&&!season.equalsIgnoreCase("none")&&!year.equalsIgnoreCase("none")){
-			System.out.println("Student information for "+courseS+" in "+season+" "+year+":");
-			for(int k=0; k<student.size(); k++){
-				if(student.get(k).course.courseSeason.equals(season)&&student.get(k).course.courseYear.equals(year)&&student.get(k).course.courseName.equals(courseS)){
-					if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
-						returnArray[0]++;
+			
+			while(!validSeason){
+				System.out.print("Enter semester to print data from (type \"none\" to skip this input): ");
+				season=kb.nextLine();
+				for(int i=0; i<student.size(); i++){
+					if(student.get(i).course.courseSeason.equals(season)){
+						validSeason=true;
 					}
-					else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
-						returnArray[1]++;
-					}
-					else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
-						returnArray[2]++;
-					}
-					else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
-						returnArray[3]++;
-					}
-					else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
-						returnArray[4]++;
+					else if(season.equalsIgnoreCase("none")){
+						validSeason=true;
 					}
 				}
+				if(!validSeason){
+					System.out.println("Invalid course season entered. Try again.");
+				}
 			}
-			printArray(returnArray);
+			
+			while(!validYear){
+				System.out.print("Enter year to print data from (type \"none\" to skip this input): ");
+				year=kb.nextLine();
+				for(int i=0; i<student.size(); i++){
+					if(student.get(i).course.courseYear.equals(year)){
+						validYear=true;
+					}
+					else if(year.equalsIgnoreCase("none")){
+						validYear=true;
+					}
+				}
+				if(!validYear){
+					System.out.println("Invalid course year entered. Try again.");
+				}
+			}
+			
+			for(int i=0; i<5; i++){
+				returnArray[i]=0;
+			}
+			
+			if(!courseS.equalsIgnoreCase("none")&&season.equalsIgnoreCase("none")&&year.equalsIgnoreCase("none")){
+				System.out.println("Student information for "+courseS+" throughout all semesters and years:");
+				for(int k=0; k<student.size(); k++){
+					if(student.get(k).course.courseName.equals(courseS)){
+						if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
+							returnArray[0]++;
+						}
+						else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
+							returnArray[1]++;
+						}
+						else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
+							returnArray[2]++;
+						}
+						else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
+							returnArray[3]++;
+						}
+						else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
+							returnArray[4]++;
+						}
+					}
+				}
+				printArray(returnArray);
+			}
+			else if(courseS.equalsIgnoreCase("none")&&!season.equalsIgnoreCase("none")&&!year.equalsIgnoreCase("none")){
+				System.out.println("Student information for all courses in "+season+" "+year+":");
+				for(int k=0; k<student.size(); k++){
+					if(student.get(k).course.courseSeason.equals(season)&&student.get(k).course.courseYear.equals(year)){
+						if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
+							returnArray[0]++;
+						}
+						else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
+							returnArray[1]++;
+						}
+						else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
+							returnArray[2]++;
+						}
+						else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
+							returnArray[3]++;
+						}
+						else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
+							returnArray[4]++;
+						}
+					}
+				}
+				printArray(returnArray);
+			}
+			else if(!courseS.equalsIgnoreCase("none")&&!season.equalsIgnoreCase("none")&&!year.equalsIgnoreCase("none")){
+				System.out.println("Student information for "+courseS+" in "+season+" "+year+":");
+				for(int k=0; k<student.size(); k++){
+					if(student.get(k).course.courseSeason.equals(season)&&student.get(k).course.courseYear.equals(year)&&student.get(k).course.courseName.equals(courseS)){
+						if(student.get(k).returnLetterGrade()=='A'||student.get(k).course.letterGrade=='a'){
+							returnArray[0]++;
+						}
+						else if(student.get(k).returnLetterGrade()=='B'||student.get(k).course.letterGrade=='b'){
+							returnArray[1]++;
+						}
+						else if(student.get(k).course.letterGrade=='C'||student.get(k).course.letterGrade=='c'){
+							returnArray[2]++;
+						}
+						else if(student.get(k).course.letterGrade=='D'||student.get(k).course.letterGrade=='d'){
+							returnArray[3]++;
+						}
+						else if(student.get(k).course.letterGrade=='F'||student.get(k).course.letterGrade=='f'){
+							returnArray[4]++;
+						}
+					}
+				}
+				printArray(returnArray);
+			}
+			else{
+				System.out.println("Not enough information entered.\n");
+			}
 		}
 		else{
-			System.out.println("Not enough information entered.\n");
+			System.out.println("You must add data before you return data.\n");
 		}
 	}
 }

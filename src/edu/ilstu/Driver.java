@@ -20,7 +20,7 @@ public class Driver{
 			dHelp.printMenu();
 			input=kb.nextLine();
 			while(!dHelp.validateInput(input)){
-				System.out.println("Invalid input.");
+				System.out.println("Invalid choice. Try again.\n");
 				dHelp.printMenu();
 				input=kb.nextLine();
 			}
