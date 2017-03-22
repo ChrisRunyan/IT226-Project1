@@ -46,22 +46,34 @@ public class DriverHelper {
 	}
 	
 	void printArray(int[] returnArray){
+		System.out.printf("%-7s", "Grade");
+		System.out.println("Students");
 		for(int i=0; i<5; i++){
 			switch(i){
 			case 0:
-				System.out.println("Number of A's: "+returnArray[i]);
+				System.out.printf("%3s", "A");
+				System.out.printf("%7s", "");
+				System.out.println(returnArray[i]);
 				break;
 			case 1:
-				System.out.println("Number of B's: "+returnArray[i]);
+				System.out.printf("%3s", "B");
+				System.out.printf("%7s", "");
+				System.out.println(returnArray[i]);
 				break;
 			case 2:
-				System.out.println("Number of C's: "+returnArray[i]);
+				System.out.printf("%3s", "C");
+				System.out.printf("%7s", "");
+				System.out.println(returnArray[i]);
 				break;
 			case 3:
-				System.out.println("Number of D's: "+returnArray[i]);
+				System.out.printf("%3s", "D");
+				System.out.printf("%7s", "");
+				System.out.println(returnArray[i]);
 				break;
 			case 4:
-				System.out.println("Number of F's: "+returnArray[i]);
+				System.out.printf("%3s", "F");
+				System.out.printf("%7s", "");
+				System.out.println(returnArray[i]);
 			}
 		}
 		System.out.println("");
