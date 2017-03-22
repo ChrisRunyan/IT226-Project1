@@ -85,28 +85,40 @@ public class DriverHelper {
 			inputFileName=kb.nextLine();
 			try{
 				reader=new Scanner(new BufferedReader(new FileReader(inputFileName+".csv")));
-				validFileName=true;
+				courseTemp=inputFileName;
+				boolean fileAdded=false;
+				
+				for(int i=0; i<courseTemp.length(); i++){
+					if(courseTemp.charAt(i)=='-'){
+						courseName=courseTemp.substring(0, i);
+						courseTemp=courseTemp.substring(i+1);
+						i=courseTemp.length();
+					}
+				}
+				
+				for(int i=0; i<courseTemp.length(); i++){
+					if(courseTemp.charAt(i)=='-'){
+						courseSeason=courseTemp.substring(0, i);
+						courseYear=courseTemp.substring(i+1);
+					}
+				}
+				
+				for(int i=0; i<student.size(); i++){
+					if(student.get(i).course.courseName.equals(courseName)&&student.get(i).course.courseSeason.equals(courseSeason)&&student.get(i).course.courseYear.equals(courseYear)){
+						fileAdded=true;
+					}
+				}
+				
+				if(!fileAdded){
+					validFileName=true;
+				}
+				else{
+					System.out.println("File already added. Try again.");
+				}
 			}
 			catch(FileNotFoundException e){
 				System.out.println("Invalid filename entered. Try again.");
-			}
-		}
-		
-		courseTemp=inputFileName;
-		
-		for(int i=0; i<courseTemp.length(); i++){
-			if(courseTemp.charAt(i)=='-'){
-				courseName=courseTemp.substring(0, i);
-				courseTemp=courseTemp.substring(i+1);
-				i=courseTemp.length();
-			}
-		}
-		
-		for(int i=0; i<courseTemp.length(); i++){
-			if(courseTemp.charAt(i)=='-'){
-				courseSeason=courseTemp.substring(0, i);
-				courseYear=courseTemp.substring(i+1);
-			}
+			}	
 		}
 		
 		firstLine=reader.nextLine();
