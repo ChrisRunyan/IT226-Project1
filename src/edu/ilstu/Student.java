@@ -9,6 +9,7 @@ public class Student{
 	public String lastName;
 	public String ulid;
 	public Course course;
+	public char letterGrade;
 	
 	public String getUlid() {
 		return ulid;
@@ -38,6 +39,7 @@ public class Student{
 		this.firstName=null;
 		this.lastName=null;
 		this.ulid=null;
+		this.letterGrade=' ';
 	}
 	
 	public Student (String firstName, String lastName, String ulid){
@@ -72,8 +74,13 @@ public class Student{
 	
 	public void addLetterGrade(String letterGrade){
 		char letterGradeC=letterGrade.charAt(0);
-		
+		this.letterGrade=letterGrade.charAt(0);
+	
 		this.course.setLetterGrade(letterGradeC);
+	}
+	
+	public char returnLetterGrade(){
+		return letterGrade;
 	}
 	
 	public void addCourse(Course course){

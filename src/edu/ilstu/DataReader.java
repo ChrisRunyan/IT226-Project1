@@ -1,7 +1,7 @@
 package edu.ilstu;
 
 /**
- * @author Kevin Haas
+ * @author Kevin Haas, Hoang Le
  *
  */
 public class DataReader {

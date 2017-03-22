@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 /**
  * 
- * @author Christopher Runyan
+ * @author Christopher Runyan, Hoang Le
  */
 public class Driver{
 	public static void main(String[] args){
 		Scanner kb=new Scanner(System.in);
 		DriverHelper dHelp=new DriverHelper();
 		DataReader dReader=new DataReader();
-		 LinkedList<Student> student = new LinkedList<Student>();
+		LinkedList<Student> student = new LinkedList<Student>();
 		String input="";
 		
 		System.out.println("Welcome to the Student Data Integration and Viewer Program (SDIVP).");
@@ -23,7 +23,6 @@ public class Driver{
 				System.out.println("Invalid input.");
 				dHelp.printMenu();
 				input=kb.nextLine();
-				
 			}
 			if(!input.equalsIgnoreCase("E")){
 				if(input.equalsIgnoreCase("A")){
